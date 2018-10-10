@@ -1,0 +1,105 @@
+.teach_app_active_elem{
+  position: relative;
+  z-index: 999992;
+}
+
+.teach_app_container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+
+  .teach_app_backdrop{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #4a4a4a8f;
+    z-index: 999990;
+  }
+
+  .teach_app_msg_container {
+    min-width: 200px;
+    max-width: 300px;
+    min-height: 100px;
+    max-height: 200px;
+    border-radius: 6px;
+    background: white;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    display: none;
+    z-index: 999991;
+    box-shadow: 0 1px 10px rgba(0,0,0,.4);
+    webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+  }
+
+  .arrow-left {
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid white;
+    position: absolute;
+    left: -10px;
+    top: 6px;
+  }
+
+  .arrow-right {
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid white;
+    position: absolute;
+    right: -10px;
+    top: 6px;
+  }
+
+  .arrow-bottom {
+    /*border-top: 7px solid transparent;*/
+    border-top: 10px solid white;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    left: 6px;
+    bottom: -10px;
+  }
+
+  .arrow-top {
+    border-bottom: 10px solid white;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    position: absolute;
+    left: 6px;
+    top: -10px;
+  }
+
+  .teach_app_elem_container{
+    position: absolute;
+    z-index: 999991;
+    background: white;
+    box-shadow: 0 1px 10px rgba(0,0,0,.4);
+    webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    //border: 1px solid red;
+  }
+
+  .teach_app_actions{
+    position: absolute;
+    bottom: 5px;
+    width: 90%;
+  }
+
+  #prev_btn{
+    float: left;
+  }
+
+  #next_btn, #done_btn{
+    float: right;
+  }
+}

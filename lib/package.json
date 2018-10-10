@@ -1,0 +1,25 @@
+{
+  "name": "ng-essentials",
+  "version": "1.0.0",
+  "description": "Ready to use all type of essential components for an web application. ",
+  "main": "bundles/ng-essential.umd.js",
+  "scripts": {
+    "compile": "gulp less && ngc",
+    "cleanup": "gulp clean",
+    "bundling": "rollup -c",
+    "minify": "uglifyjs dist/bundles/ng-essential.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ng-essential.umd.min.js",
+    "build": "npm run cleanup && npm run compile && npm run bundling && gulp copyfiles && npm run minify"
+  },
+  "author": "Jagdeep Singh <singh.jagdeep91@gmail.com>",
+  "devDependencies": {
+    "@angular/compiler": "^6.1.9",
+    "@angular/compiler-cli": "^6.1.9",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-less": "^4.0.1",
+    "rollup": "^0.66.5",
+    "typescript": "^2.7.2",
+    "uglify-js": "^3.4.9"
+  }
+}
