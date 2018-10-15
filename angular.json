@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-essentials",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,6 +24,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/css/site.css",
               "lib/dist/bundles/styles/site.css"
             ],
             "scripts": [
