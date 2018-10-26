@@ -1,4 +1,5 @@
 .navbar {
+  font-size: 14px;
   height: 60px;
 
   a {
@@ -33,15 +34,24 @@
     }
 
     .navbar-nav {
+      > li {
+        > a {
+          padding: 20px;
+          color: @white;
+        }
+      }
       > .open,
       > .active {
+        a {
+          color: @black;
+        }
         > a,
         a:hover,
         a:focus {
+          color: @black;
           background-color: @nav-select-color; // @selected-menu-item;
-
           span {
-            color: @white;
+            color: @black;
           }
         }
       }
@@ -52,15 +62,15 @@
         border: none;
       }
     }
-  }
 
-  .navbar-brand {
-    border-right: 1px solid @user-nav-border;
-    //cursor: default;
-    height: 59px;
-    padding: 16px 30px;
-    //margin-right: 80px;
-    color: @white;
+    .navbar-brand {
+      border-right: 1px solid @white;
+      //cursor: default;
+      height: 59px;
+      padding: 16px 30px;
+      //margin-right: 80px;
+      color: @white;
+    }
   }
 
   .navbar-nav {
@@ -83,7 +93,7 @@
           color: @dark-text-color;
 
           &:hover {
-            color: @white;
+            color: @black;
           }
 
           span {
@@ -93,7 +103,7 @@
 
         &.active {
           a {
-            color: @white;
+            color: @black;
           }
         }
       }

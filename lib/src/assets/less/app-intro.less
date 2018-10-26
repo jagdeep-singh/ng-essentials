@@ -15,15 +15,17 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background: #4a4a4a8f;
+    background: -webkit-radial-gradient(center,ellipse cover,rgba(0,0,0,0.4) 0,rgba(0,0,0,0.9) 100%);;
+    //background: #4a4a4a8f;
     z-index: 999990;
   }
 
   .teach_app_msg_container {
-    min-width: 200px;
-    max-width: 300px;
+    //min-width: 200px;
+    //max-width: 300px;
+    width: 300px;
     min-height: 100px;
-    max-height: 200px;
+    //max-height: 200px;
     border-radius: 6px;
     background: white;
     padding: 10px;
@@ -37,6 +39,10 @@
     -ms-transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
     transition: all .3s ease-out;
+
+    #message_display{
+      margin-bottom: 30px;
+    }
   }
 
   .arrow-left {

@@ -1,7 +1,7 @@
 {
   "name": "ng-essentials",
   "version": "1.0.0",
-  "description": "Ready to use all type of essential components for an web application. ",
+  "description": "Ready to use essential components for Angular web application.",
   "main": "bundles/ng-essential.umd.js",
   "scripts": {
     "compile": "gulp less && ngc",

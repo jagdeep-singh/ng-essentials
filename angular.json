@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css",
               "src/assets/css/site.css",
-              "lib/dist/bundles/styles/site.css"
+//              "lib/dist/bundles/styles/site.css",
+              "lib/src/assets/css/site.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js"

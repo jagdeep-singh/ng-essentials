@@ -6,6 +6,11 @@ export class AppIntroService {
   private dataJson : any;
 
   constructor(config : any){
+    config.data.forEach((obj : any)=>{
+      if(obj.selectorPosition != null){
+        obj.selector = $(obj.selector)[obj.selectorPosition]
+      }
+    });
     this.dataJson = config.data;
   }
 
@@ -35,6 +40,10 @@ export class AppIntroService {
     document.getElementsByClassName("teach_app_backdrop")[0].addEventListener("click", ()=>{
       this.destroy();
     });
+
+    window.addEventListener("resize", ()=>{
+      this.refresh();
+    });
   }
 
   destroy(){
@@ -43,7 +52,7 @@ export class AppIntroService {
   }
 
   validate(){
-    if(!this.activeIndex){
+    if(this.activeIndex == -1 && this.activeIndex == null){
       return false;
     }
     else if(this.activeIndex < 0 || this.activeIndex >= this.dataJson.length){
@@ -58,7 +67,6 @@ export class AppIntroService {
     if(!this.validate()){
       return;
     }
-    console.log(this.activeIndex);
     let obj = this.dataJson[this.activeIndex];
     let elem = $(obj.selector);
     $(elem).removeClass("teach_app_active_elem");
@@ -73,7 +81,7 @@ export class AppIntroService {
   moveToPrevious(){
     this.beforeMoveInterceptor();
     this.activeIndex--;
-    this.inItMsgObj(this.dataJson[this.activeIndex])
+    this.inItMsgObj(this.dataJson[this.activeIndex]);
   }
 
   moveStepInterceptor(){
@@ -108,9 +116,17 @@ export class AppIntroService {
     }
   }
 
+  refresh(){
+    this.inItMsgObj(this.dataJson[this.activeIndex]);
+  }
+
   inItMsgObj(data : any){
     this.moveStepInterceptor();
     $("#message_display").html(data.message);
+    if(!data.selector){
+      this.showInfoMsg();
+      return;
+    }
     this.highlightSelector(data.selector);
     switch (data.position){
       case "left" :
@@ -126,6 +142,23 @@ export class AppIntroService {
         this.showMsgOnBottom(data.selector);
         break;
     }
+  }
+
+  showInfoMsg(){
+    $(".teach_app_elem_container").css({
+      'height' : 0,
+      'width' : 0,
+      'left' : 0,
+      'top' : 0
+    });
+    let msgElem = $(".teach_app_msg_container");
+    msgElem.css({
+      'display' : 'block',
+      'left' : (window.innerWidth/2)-(msgElem.innerWidth()/2),
+      'top' : (window.innerHeight/2)-(msgElem.innerHeight()/2),
+      'right' : 'auto',
+      'bottom' : 'auto'
+    });
   }
 
   showMsgOnLeft(selector : any){
@@ -190,7 +223,7 @@ export class AppIntroService {
       'height' : elemHeight+10,
       'width' : elemWidth+10,
       'left' : offset.left-5,
-      'top' : offset.top-10
+      'top' : offset.top-5
     });
     $(selector).addClass("teach_app_active_elem");
   }
@@ -203,9 +236,9 @@ export class AppIntroService {
           <div class="teach_app_msg_container">
             <div id="message_display"></div>
             <div class="teach_app_actions">
-              <button id="prev_btn" class="btn btn-link">Prev</button>
-              <button id="next_btn" class="btn btn-link">Next</button>
-              <button id="done_btn" class="btn btn-link">Done</button>
+              <a id="prev_btn" class="btn btn-link">Prev</a>
+              <a id="next_btn" class="btn btn-link">Next</a>
+              <a id="done_btn" class="btn btn-link">Done</a>
             </div>
             <div id="arrow_pointer"></div>
           </div>

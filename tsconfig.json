@@ -23,7 +23,7 @@
         "dist/my-lib/*"
       ],
       "ng-essential":[
-        "lib/dist"
+        "lib"
       ]
     },
     "typeRoots": [

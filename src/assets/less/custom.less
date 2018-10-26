@@ -1,3 +1,55 @@
+body {
+  color: @black;
+
+  .btn-info, .btn-info:hover, .btn-info:active, .btn-info:active:hover, .btn-info:focus {
+    background-color: @brand-primary;
+    border-color: @brand-primary;
+  }
+}
+
 .app-content{
   margin-top: 60px;
+}
+
+.library-heading{
+  margin-top: 150px;
+  h1 {
+    font-weight: 300;
+    font-size: 40px;
+  }
+
+  h3 {
+    font-weight: 200;
+    font-size: 30px;
+  }
+
+}
+
+.mg-top-20{
+  margin-top: 20px;
+}
+
+.mg-top-40{
+  margin-top: 40px;
+}
+
+.library-features{
+  display: flex;
+  margin: 50px 20%;
+  justify-content: center;
+
+  .feature {
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    margin: 0 10px;
+
+    i {
+      font-size: 50px;
+    }
+
+    > div{
+      margin-top: 20px;
+    }
+  }
 }
