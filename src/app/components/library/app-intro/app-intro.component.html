@@ -19,8 +19,9 @@
       <div><b>Easy to customize</b></div>
       <p>You can customize and configure according to your application design.</p>
     </div>
-    <div class="feature">
-      <i class="glyphicon glyphicon-volume-up"></i>
+    <div class="feature" (click)="enableVolume()">
+      <i *ngIf="!enableVoice" class="glyphicon glyphicon-volume-off"></i>
+      <i *ngIf="enableVoice" class="glyphicon glyphicon-volume-up"></i>
       <div><b>User Interactive</b></div>
       <p>This library can provide application introduction with voice.</p>
     </div>

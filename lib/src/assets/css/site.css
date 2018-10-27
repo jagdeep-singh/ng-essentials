@@ -2,20 +2,21 @@
   position: relative;
   z-index: 999992;
 }
-.teach_app_container {
+.teach_app_backdrop {
   position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
+  z-index: 99990;
+}
+.teach_app_container {
+  position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   z-index: 99999;
-}
-.teach_app_container .teach_app_backdrop {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-  z-index: 999990;
 }
 .teach_app_container .teach_app_msg_container {
   width: 300px;

@@ -4,7 +4,8 @@ export class AppIntroService {
 
   private activeIndex : any = -1;
   private dataJson : any;
-
+  private speechSynthesis : any;
+  private voicesList : any;
   constructor(config : any){
     config.data.forEach((obj : any)=>{
       if(obj.selectorPosition != null){
@@ -12,6 +13,13 @@ export class AppIntroService {
       }
     });
     this.dataJson = config.data;
+    if(config.enableVoice){
+      this.speechSynthesis = window.speechSynthesis;
+      this.voicesList = speechSynthesis.getVoices();
+      let timeout = setTimeout(()=>{
+        this.voicesList = speechSynthesis.getVoices();
+      });
+    }
   }
 
   start(){
@@ -40,15 +48,13 @@ export class AppIntroService {
     document.getElementsByClassName("teach_app_backdrop")[0].addEventListener("click", ()=>{
       this.destroy();
     });
-
-    window.addEventListener("resize", ()=>{
-      this.refresh();
+    document.getElementsByClassName("teach_app_container")[0].addEventListener("click", ()=>{
+      this.destroy();
     });
-  }
 
-  destroy(){
-    this.beforeMoveInterceptor();
-    $(".teach_app_container").remove();
+    document.getElementsByClassName("teach_app_elem_container")[0].addEventListener("click", (e : any)=>{
+      e.stopPropagation();
+    });
   }
 
   validate(){
@@ -70,6 +76,7 @@ export class AppIntroService {
     let obj = this.dataJson[this.activeIndex];
     let elem = $(obj.selector);
     $(elem).removeClass("teach_app_active_elem");
+    $(".teach_app_active_elem").removeClass("teach_app_active_elem");
   }
 
   moveToNext(){
@@ -116,13 +123,14 @@ export class AppIntroService {
     }
   }
 
-  refresh(){
-    this.inItMsgObj(this.dataJson[this.activeIndex]);
-  }
+  //refresh(){
+  //  this.inItMsgObj(this.dataJson[this.activeIndex]);
+  //}
 
   inItMsgObj(data : any){
     this.moveStepInterceptor();
     $("#message_display").html(data.message);
+    this.speak(data.voiceMessage || data.message);
     if(!data.selector){
       this.showInfoMsg();
       return;
@@ -226,12 +234,53 @@ export class AppIntroService {
       'top' : offset.top-5
     });
     $(selector).addClass("teach_app_active_elem");
+    this.scrollToVisiblePartOfWindow(selector);
+  }
+
+  scrollToVisiblePartOfWindow(selector : any){
+    let elem = $(selector);
+    let offset = elem.offset();
+    let elemHeight = elem.innerHeight();
+    let scrollYPosition = window.scrollY;
+    let windowHeight = window.innerHeight;
+    if(offset.top+elemHeight < scrollYPosition){
+      window.scrollTo(0, offset.top-(windowHeight/2));
+    }
+    else if(offset.top+elemHeight > scrollYPosition+windowHeight){
+      window.scrollTo(0, offset.top-(windowHeight/2));
+    }
+  }
+
+  speak(msg : any){
+    if(!this.speechSynthesis){
+      return;
+    }
+    var utterThis = new SpeechSynthesisUtterance(msg);
+    utterThis.rate = 0.8;
+    utterThis.pitch = 0.6;
+    utterThis.voice = this.getVoiceLanguage("en-IN");
+    this.speechSynthesis.speak(utterThis);
+  }
+
+  getVoiceLanguage(langCode? : any){
+    let voice = this.voicesList.find((voiceObj : any)=>{
+      if(langCode && voiceObj.lang == langCode){
+        return true;
+      }
+      else if(!langCode && voiceObj.default){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+    return voice;
   }
 
   getHtmlRelatedToThisIntro(){
     return `
+      <div class="teach_app_backdrop"></div>
       <div class="teach_app_container">
-        <div class="teach_app_backdrop"></div>
         <div class="teach_app_elem_container">
           <div class="teach_app_msg_container">
             <div id="message_display"></div>
@@ -247,4 +296,9 @@ export class AppIntroService {
     `;
   }
 
+  destroy(){
+    this.beforeMoveInterceptor();
+    $(".teach_app_container").remove();
+    $(".teach_app_backdrop").remove();
+  }
 }

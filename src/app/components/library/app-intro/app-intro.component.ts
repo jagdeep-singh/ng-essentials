@@ -7,9 +7,12 @@ declare var $ : any;
 })
 export class AppIntroComponent {
 
+  enableVoice : boolean = false;
+
   inputData = [
     {
-      message : `Hi Welcome to App-Intro. We will walk you through our features.`
+      message : `Hi Welcome to App-Intro. We will walk you through our features.`,
+      voiceMessage : `Hello, Welcome to out library App Intro. I am here to walk you through its features. Hope you will love them.`,
     },
     {
       message : `Hey this is our library name. Hope you will like it.`,
@@ -53,7 +56,7 @@ export class AppIntroComponent {
     },
     {
       message : `
-        Feature : Browser compatibility. Run in any browser and out library won't let you down.
+        Feature : Browser compatibility. Run in any browser and our library won't let you down.
         <br/>
         <b>That's all folks. How was it ?</b>
       `,
@@ -67,9 +70,14 @@ export class AppIntroComponent {
     console.log(this.inputData);
   }
 
+  enableVolume(){
+    this.enableVoice = !this.enableVoice;
+  }
+
   startDemo(){
     let introApp : any = new AppIntroService({
-      data : this.inputData
+      data : this.inputData,
+      enableVoice : this.enableVoice
     });
     introApp.start();
   }
